@@ -1,64 +1,83 @@
-/*
-CSCI 474 - Project 1
-Peter Fraser, Jackson Gravel, Matthew Greatens, and Tom Hoskins
-*/
+//CSCI 474 Project 1
+//Peter Fraser, Jackson Gravel, Matthew Greatens, Tom Hoskins
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <unistd.h>
+#include <time.h>
+#define SMALL 100000000
+#define MEDIUM 1000000000
+#define LARGE 10000000000
 
-/*
-imports:
-- stdio.h for general functionality
-- stdlib.h for general functionality
-- math.h for hyperbolic tangent function
-*/
-#import <stdio.h>
-#import <stdlib.h>
-#import <math.h>
-
-/*
-Define commonly used values to avoid "magic numbers"
-*/
-#define SMALL 100000000			//100,000,000
-#define MEDIUM 1000000000		//1,000,000,000
-#define LARGE 10000000000		//10,000,000,000
-
-/*
-Main function - medium and large dataset files are commented out to avoid the large amount of time it takes
-to generate them. Files are whitespace delimited.
-*/
-int main(void)
+/* Function Declarations */
+float oneProcess(int size);
+float twoProcesses(int size);
+int main()
 {
-	int counter;
-	float tempFloat;
-	/*
-	Create small, medium, and large files containing values between 0 and 1
-	*/
-	FILE* small, * medium, * large;
-	//small dataset
-	small = fopen("smallDataset.txt", "w");
-	for (counter = 0; counter < SMALL; counter++)
-	{
-		tempFloat = (float)rand() / RAND_MAX;		//Creates random floating point value between 0 and 1
-		fprintf(small, "%f ", tempFloat);			//fprintf(file pointer, format string, variable)
-	}
-	fclose(small);
-	/*
-	//medium dataset
-	medium = fopen("mediumDataset.txt", "w");
-	for (counter = 0; counter < MEDIUM; counter++)
-	{
-		tempFloat = (float)rand() / RAND_MAX;		//Creates random floating point value between 0 and 1
-		fprintf(medium, "%f ", tempFloat);			//fprintf(file pointer, format string, variable)
-	}
-	fclose(medium);
-	*/
-	/*
-	//large dataset
-	large = fopen("largeDataset.txt", "w");
-	for (counter = 0; counter < LARGE; counter++)
-	{
-		tempFloat = (float)rand() / RAND_MAX;		//Creates random floating point value between 0 and 1
-		fprintf(large, "%f ", tempFloat);			//fprintf(file pointer, format string, variable)
-	}
-	fclose(large);
-	*/
-	return 0;
+   time_t small1StartTime = time(NULL);
+   clock_t small1Begin = clock();
+   float sum1 = oneProcess(SMALL);
+   clock_t small1End = clock();
+   time_t small1EndTime = time(NULL);
+   double small1ExecutionTime = (double)(small1End - small1Begin) / CLOCKS_PER_SEC;    //Execution time
+   int small1WallTime = small1EndTime - small1StartTime;                               //Time elapsed
+
+   printf("\n1 process, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum1, small1ExecutionTime, small1WallTime);
+
+   time_t small2StartTime = time(NULL);
+   clock_t small2Begin = clock();
+   float sum2 = twoProcesses(SMALL);
+   clock_t small2End = clock();
+   time_t small2EndTime = time(NULL);
+   double small2ExecutionTime = (double)(small2End - small2Begin) / CLOCKS_PER_SEC;
+   int small2WallTime = small2EndTime - small2StartTime;
+
+   printf("\n2 processes, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum2, small2ExecutionTime, small2WallTime);
+
+return 0;
+}
+
+float oneProcess(int size)
+{
+   float sum = 0;
+   float tempVal;
+   for (int i = 0; i < size; i++)
+   {
+      tempVal = (float)rand() / (float)RAND_MAX;
+      sum += tanh(tempVal);
+   }
+   return sum;
+}
+float twoProcesses(int size)
+{
+   float sum1 = 0;
+   float sum2 = 0;
+   float tempVal1, tempVal2, tempSum;
+   int pipe1[2];
+   if(pipe(pipe1) < 0)
+      exit(1);
+   int p = fork();
+   if(p == 0) //child
+   {
+    close(pipe1[0]);
+    for(int i = 0; i < (size/2); i++)
+      {
+       tempVal2 = (float)rand() / (float)RAND_MAX;
+       sum2 += tanh(tempVal2);
+      }
+    write(pipe1[1], &sum2, sizeof(sum2));
+    exit(0);
+   }
+   else //parent
+   {
+    close(pipe1[1]);
+    for(int i = 0; i < (size/2); i++)
+      {
+       tempVal1 = (float)rand() / (float)RAND_MAX;
+       sum1 = tanh(tempVal1);
+      }
+    read(pipe1[0], &tempSum, sizeof(tempSum));
+    sum1 += tempSum;
+   }
+return sum1;
 }
