@@ -19,45 +19,164 @@ double EightProcesses(long size);
 /* Main Function */
 int main()
 {
+	//
+	// SMALL size
+	//
 	time_t small1StartTime = time(NULL);
 	clock_t small1Begin = clock();
-	double sum1 = OneProcess(MEDIUM);
+	double sum1 = OneProcess(SMALL);
 	clock_t small1End = clock();
 	time_t small1EndTime = time(NULL);
 	double small1ExecutionTime = (double)(small1End - small1Begin) / CLOCKS_PER_SEC; //Execution time
 	int small1WallTime = small1EndTime - small1StartTime;							 //Time elapsed
 
-	printf("\n1 process, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum1, small1ExecutionTime, small1WallTime);
 
 	time_t small2StartTime = time(NULL);
 	clock_t small2Begin = clock();
-	double sum2 = TwoProcesses(MEDIUM);
+	double sum2 = TwoProcesses(SMALL);
 	clock_t small2End = clock();
 	time_t small2EndTime = time(NULL);
 	double small2ExecutionTime = (double)(small2End - small2Begin) / CLOCKS_PER_SEC;
 	int small2WallTime = small2EndTime - small2StartTime;
 
-	printf("\n2 processes, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum2, small2ExecutionTime, small2WallTime);
 
 	time_t small3StartTime = time(NULL);
 	clock_t small3Begin = clock();
-	double sum3 = FourProcesses(MEDIUM);
+	double sum3 = FourProcesses(SMALL);
 	clock_t small3End = clock();
 	time_t small3EndTime = time(NULL);
 	double small3ExecutionTime = (double)(small3End - small3Begin) / CLOCKS_PER_SEC;
 	int small3WallTime = small3EndTime - small3StartTime;
 
-	printf("\n4 processes, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum3, small3ExecutionTime, small3WallTime);
-
 	time_t small4StartTime = time(NULL);
 	clock_t small4Begin = clock();
-	double sum4 = EightProcesses(MEDIUM);
+	double sum4 = EightProcesses(SMALL);
 	clock_t small4End = clock();
 	time_t small4EndTime = time(NULL);
 	double small4ExecutionTime = (double)(small4End - small4Begin) / CLOCKS_PER_SEC;
 	int small4WallTime = small4EndTime - small4StartTime;
 
-	printf("\n4 processes, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum4, small4ExecutionTime, small4WallTime);
+	//
+	// MEDIUM size
+	//
+
+	time_t medium1StartTime = time(NULL);
+	clock_t medium1Begin = clock();
+	double mediumSum1 = OneProcess(MEDIUM);
+	clock_t medium1End = clock();
+	time_t medium1EndTime = time(NULL);
+	double medium1ExecutionTime = (double)(medium1End - medium1Begin) / CLOCKS_PER_SEC; //Execution time
+	int medium1WallTime = medium1EndTime - medium1StartTime;							 //Time elapsed
+
+	time_t medium2StartTime = time(NULL);
+	clock_t medium2Begin = clock();
+	double mediumSum2 = TwoProcesses(MEDIUM);
+	clock_t medium2End = clock();
+	time_t medium2EndTime = time(NULL);
+	double medium2ExecutionTime = (double)(medium2End - medium2Begin) / CLOCKS_PER_SEC;
+	int medium2WallTime = medium2EndTime - medium2StartTime;
+
+	time_t medium3StartTime = time(NULL);
+	clock_t medium3Begin = clock();
+	double mediumSum3 = FourProcesses(MEDIUM);
+	clock_t medium3End = clock();
+	time_t medium3EndTime = time(NULL);
+	double medium3ExecutionTime = (double)(medium3End - medium3Begin) / CLOCKS_PER_SEC;
+	int medium3WallTime = medium3EndTime - medium3StartTime;
+
+	time_t medium4StartTime = time(NULL);
+	clock_t medium4Begin = clock();
+	double mediumSum4 = EightProcesses(MEDIUM);
+	clock_t medium4End = clock();
+	time_t medium4EndTime = time(NULL);
+	double medium4ExecutionTime = (double)(medium4End - medium4Begin) / CLOCKS_PER_SEC;
+	int medium4WallTime = medium4EndTime - medium4StartTime;
+
+	//
+	// LARGE SIZE
+	//
+	
+	time_t large1StartTime = time(NULL);
+	clock_t large1Begin = clock();
+	double largeSum1 = OneProcess(LARGE);
+	clock_t large1End = clock();
+	time_t large1EndTime = time(NULL);
+	double large1ExecutionTime = (double)(large1End - large1Begin) / CLOCKS_PER_SEC; //Execution time
+	double large1WallTime = (double)(large1EndTime - large1StartTime) /  CLOCKS_PER_SEC;							 //Time elapsed
+
+	//printf("\n1 process, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum1, small1ExecutionTime, small1WallTime);
+
+	time_t large2StartTime = time(NULL);
+	clock_t large2Begin = clock();
+	double largeSum2 = TwoProcesses(LARGE);
+	clock_t large2End = clock();
+	time_t large2EndTime = time(NULL);
+	double large2ExecutionTime = (double)(large2End - large2Begin) / CLOCKS_PER_SEC;
+	int large2WallTime = large2EndTime - large2StartTime;
+
+	//printf("\n2 processes, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum2, small2ExecutionTime, small2WallTime);
+
+	time_t large3StartTime = time(NULL);
+	clock_t large3Begin = clock();
+	double largeSum3 = FourProcesses(LARGE);
+	clock_t large3End = clock();
+	time_t large3EndTime = time(NULL);
+	double large3ExecutionTime = (double)(large3End - large3Begin) / CLOCKS_PER_SEC;
+	int large3WallTime = large3EndTime - large3StartTime;
+
+	//printf("\n4 processes, small: Sum: %f Execution Time: %f sec Wall Time: %d sec\n", sum3, small3ExecutionTime, small3WallTime);
+
+	time_t large4StartTime = time(NULL);
+	clock_t large4Begin = clock();
+	double largeSum4 = EightProcesses(LARGE);
+	clock_t large4End = clock();
+	time_t large4EndTime = time(NULL);
+	double large4ExecutionTime = (double)(large4End - large4Begin) / CLOCKS_PER_SEC;
+	int large4WallTime = large4EndTime - large4StartTime;
+
+
+	printf("\n\n");
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 CPU usage time (msec) \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+	printf("----------------------------------------------------------------------------------\n");
+	printf("File Size \t | \t Small \t\t | \t Medium \t | \t Large\n");
+	printf("----------------------------------------------------------------------------------\n");
+	printf("1 Process \t | \t %f\t | \t %f\t | \t %f\n", small1ExecutionTime, medium1ExecutionTime, large1ExecutionTime);
+	printf("2 Process \t | \t %f\t | \t %f\t | \t %f\n", small2ExecutionTime, medium2ExecutionTime, large2ExecutionTime);
+	printf("4 Process \t | \t %f\t | \t %f\t | \t %f\n", small3ExecutionTime, medium3ExecutionTime, large3ExecutionTime);
+	printf("8 Process \t | \t %f\t | \t %f\t | \t %f\n", small4ExecutionTime, medium4ExecutionTime, large4ExecutionTime);
+	printf("----------------------------------------------------------------------------------\n");
+	printf("Calculations \t | \t 100,000,000* \t | \t 1,000,000,000*  |  10,000,000,000*\n");
+	printf("\n\n");
+
+	printf("\n\n");
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 Wall clock/Calendar time(msec) \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+	printf("----------------------------------------------------------------------------------\n");
+	printf("File Size \t | \t Small \t\t | \t Medium \t | \t Large\n");
+	printf("----------------------------------------------------------------------------------\n");
+	printf("1 Process \t | \t %d\t | \t %d \t | \t %f\n", small1WallTime, medium1WallTime, large1WallTime);
+	printf("2 Process \t | \t %d\t | \t %d \t | \t %d\n", small2WallTime, medium2WallTime, large2WallTime);
+	printf("4 Process \t | \t %d\t | \t %d \t | \t %d\n", small3WallTime, medium3WallTime, large3WallTime);
+	printf("8 Process \t | \t %d\t | \t %d \t | \t %d\n", small4WallTime, medium4WallTime, large4WallTime);
+	printf("----------------------------------------------------------------------------------\n");
+	printf("Calculations \t | \t 100,000,000* \t | \t 1,000,000,000*  |  10,000,000,000*\n");
+	printf("\n\n");
+
+	printf("\n\n");
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 Child Process Time \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\n");
+	printf("----------------------------------------------------------------------------------\n");
+	printf("File Size \t | \t Small \t\t | \t Medium \t | \t Large\n");
+	printf("----------------------------------------------------------------------------------\n");
+	printf("Child 1 \t | \t %d\t | \t %d \t | \t %f\n", small1WallTime, medium1WallTime, large1WallTime);
+	printf("Child 2 \t | \t %d\t | \t %d \t | \t %d\n", small2WallTime, medium2WallTime, large2WallTime);
+	printf("Child 3 \t | \t %d\t | \t %d \t | \t %d\n", small3WallTime, medium3WallTime, large3WallTime);
+	printf("Child 4 \t | \t %d\t | \t %d \t | \t %d\n", small4WallTime, medium4WallTime, large4WallTime);
+	printf("Child 1 \t | \t %d\t | \t %d \t | \t %f\n", small1WallTime, medium1WallTime, large1WallTime);
+	printf("Child 2 \t | \t %d\t | \t %d \t | \t %d\n", small2WallTime, medium2WallTime, large2WallTime);
+	printf("Child 3 \t | \t %d\t | \t %d \t | \t %d\n", small3WallTime, medium3WallTime, large3WallTime);
+	printf("Child 4 \t | \t %d\t | \t %d \t | \t %d\n", small4WallTime, medium4WallTime, large4WallTime);
+	printf("----------------------------------------------------------------------------------\n");
+	printf("Calculations \t | \t 100,000,000* \t | \t 1,000,000,000*  |  10,000,000,000*\n");
+	printf("\n\n");
 
 	return 0;
 }
