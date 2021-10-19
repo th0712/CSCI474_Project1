@@ -21,6 +21,43 @@ double EightProcesses(long size);
 /* Main Function */
 int main()
 {
+	//
+	// MEDIUM size
+	//
+	struct timeval medium1WallStart, medium1WallEnd, medium2WallStart, medium2WallEnd, medium3WallStart, medium3WallEnd,  medium4WallStart, medium4WallEnd;
+
+	gettimeofday(&medium1WallStart, NULL);
+	clock_t medium1Begin = clock();
+	double mediumSum1 = OneProcess(MEDIUM);
+	clock_t medium1End = clock();
+	gettimeofday(&medium1WallEnd, NULL);
+	double medium1ExecutionTime = (double)(medium1End - medium1Begin) / CLOCKS_PER_SEC; //Execution time
+	long medium1WallTime = (medium1WallEnd.tv_sec - medium1WallStart.tv_sec) * 1000000 + medium1WallEnd.tv_usec - medium1WallStart.tv_usec;							 //Time elapsed
+
+	gettimeofday(&medium2WallStart, NULL);
+	clock_t medium2Begin = clock();
+	double mediumSum2 = TwoProcesses(MEDIUM);
+	clock_t medium2End = clock();
+	gettimeofday(&medium2WallEnd, NULL);
+	double medium2ExecutionTime = (double)(medium2End - medium2Begin) / CLOCKS_PER_SEC;
+	long medium2WallTime = (medium2WallEnd.tv_sec - medium2WallStart.tv_sec) * 1000000 + medium2WallEnd.tv_usec - medium2WallStart.tv_usec;
+
+	gettimeofday(&medium3WallStart, NULL);
+	clock_t medium3Begin = clock();
+	double mediumSum3 = FourProcesses(MEDIUM);
+	clock_t medium3End = clock();
+	gettimeofday(&medium3WallEnd, NULL);
+	double medium3ExecutionTime = (double)(medium3End - medium3Begin) / CLOCKS_PER_SEC;
+	long medium3WallTime = (medium3WallEnd.tv_sec - medium3WallStart.tv_sec) * 1000000 + medium3WallEnd.tv_usec - medium3WallStart.tv_usec;
+
+	gettimeofday(&medium4WallStart, NULL);
+	clock_t medium4Begin = clock();
+	double mediumSum4 = EightProcesses(MEDIUM);
+	clock_t medium4End = clock();
+	gettimeofday(&medium4WallEnd, NULL);
+	double medium4ExecutionTime = (double)(medium4End - medium4Begin) / CLOCKS_PER_SEC;
+	long medium4WallTime = (medium4WallEnd.tv_sec - medium4WallStart.tv_sec) * 1000000 + medium4WallEnd.tv_usec - medium4WallStart.tv_usec;
+
 	struct timeval small1WallStart, small1WallEnd, small2WallStart, small2WallEnd, small3WallStart, small3WallEnd,  small4WallStart, small4WallEnd;
 	//
 	// SMALL size
@@ -58,43 +95,6 @@ int main()
 	gettimeofday(&small4WallEnd, NULL);
 	double small4ExecutionTime = (double)(small4End - small4Begin) / CLOCKS_PER_SEC;
 	long small4WallTime = (small4WallEnd.tv_sec - small4WallStart.tv_sec) * 1000000 + small4WallEnd.tv_usec - small4WallStart.tv_usec;
-
-	//
-	// MEDIUM size
-	//
-	struct timeval medium1WallStart, medium1WallEnd, medium2WallStart, medium2WallEnd, medium3WallStart, medium3WallEnd,  medium4WallStart, medium4WallEnd;
-
-	gettimeofday(&medium1WallStart, NULL);
-	clock_t medium1Begin = clock();
-	double mediumSum1 = OneProcess(MEDIUM);
-	clock_t medium1End = clock();
-	gettimeofday(&medium1WallEnd, NULL);
-	double medium1ExecutionTime = (double)(medium1End - medium1Begin) / CLOCKS_PER_SEC; //Execution time
-	long medium1WallTime = (medium1WallEnd.tv_sec - medium1WallStart.tv_sec) * 1000000 + medium1WallEnd.tv_usec - medium1WallStart.tv_usec;							 //Time elapsed
-
-	gettimeofday(&medium2WallStart, NULL);
-	clock_t medium2Begin = clock();
-	double mediumSum2 = TwoProcesses(MEDIUM);
-	clock_t medium2End = clock();
-	gettimeofday(&medium2WallEnd, NULL);
-	double medium2ExecutionTime = (double)(medium2End - medium2Begin) / CLOCKS_PER_SEC;
-	long medium2WallTime = (medium2WallEnd.tv_sec - medium2WallStart.tv_sec) * 1000000 + medium2WallEnd.tv_usec - medium2WallStart.tv_usec;
-
-	gettimeofday(&medium3WallStart, NULL);
-	clock_t medium3Begin = clock();
-	double mediumSum3 = FourProcesses(MEDIUM);
-	clock_t medium3End = clock();
-	gettimeofday(&medium3WallEnd, NULL);
-	double medium3ExecutionTime = (double)(medium3End - medium3Begin) / CLOCKS_PER_SEC;
-	long medium3WallTime = (medium3WallEnd.tv_sec - medium3WallStart.tv_sec) * 1000000 + medium3WallEnd.tv_usec - medium3WallStart.tv_usec;
-
-	gettimeofday(&medium4WallStart, NULL);
-	clock_t medium4Begin = clock();
-	double mediumSum4 = EightProcesses(MEDIUM);
-	clock_t medium4End = clock();
-	gettimeofday(&medium4WallEnd, NULL);
-	double medium4ExecutionTime = (double)(medium4End - medium4Begin) / CLOCKS_PER_SEC;
-	long medium4WallTime = (medium4WallEnd.tv_sec - medium4WallStart.tv_sec) * 1000000 + medium4WallEnd.tv_usec - medium4WallStart.tv_usec;
 
 	//
 	// LARGE SIZE
